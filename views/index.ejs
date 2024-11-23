@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum Wallet Balance Checker</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Ethereum Wallet Balance Checker</h1>
+    <form id="balanceForm">
+        <label for="address">Enter Ethereum Address:</label>
+        <input type="text" id="address" name="address" required>
+        <button type="submit">Check Balance</button>
+    </form>
+    <div id="balanceResult"></div>
+    <div id="transactionHistory"></div>
+    
+    <!-- Load Web3.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    
+    <script>
+        // Check if MetaMask is installed
+        if (typeof window.ethereum !== 'undefined') {
+            // Use MetaMask's provider
+            window.web3 = new Web3(window.ethereum);
+            // Request account access if needed
+            window.ethereum.request({ method: 'eth_requestAccounts' });
+        } else {
+            // Fallback to Infura if MetaMask is not installed
+            window.web3 = new Web3('https://mainnet.infura.io/v3/435b6c874cce4a35beeecd908e84c870'); // Use your Infura API key
+        }
+    </script>
+    <script src="/scripts.js"></script>
+</body>
+</html>
